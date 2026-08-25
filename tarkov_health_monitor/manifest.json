@@ -1,0 +1,84 @@
+{
+  "id": "tarkov_health_monitor",
+  "name": "塔科夫血量监控",
+  "version": "1.0.3",
+  "sdk": "1",
+  "author": "Your Name",
+  "description": "读取塔科夫血量，低于阈值触发郊狼",
+  "entry": "main.py",
+  "capabilities": {
+    "startup_check": true
+  },
+  "config_schema": [
+    {
+      "section": "内存地址",
+      "fields": [
+        {
+          "key": "base_address",
+          "type": "text",
+          "label": "基址 (十六进制)",
+          "default": "0x792F5734",
+          "description": "CE找到的绿色地址"
+        },
+        {
+          "key": "offsets",
+          "type": "text",
+          "label": "偏移链 (逗号分隔)",
+          "default": "",
+          "description": "例如 0x10,0x24"
+        }
+      ]
+    },
+    {
+      "section": "触发条件",
+      "fields": [
+        {
+          "key": "threshold",
+          "type": "number",
+          "label": "生命阈值",
+          "default": 30,
+          "min": 1,
+          "max": 500
+        },
+        {
+          "key": "check_interval",
+          "type": "number",
+          "label": "检查间隔 (秒)",
+          "default": 0.2,
+          "min": 0.05,
+          "max": 2,
+          "step": 0.05
+        }
+      ]
+    },
+    {
+      "section": "反馈参数",
+      "fields": [
+        {
+          "key": "delta_pct",
+          "type": "percent",
+          "label": "强度增量 (%)",
+          "default": 50
+        },
+        {
+          "key": "duration_s",
+          "type": "duration",
+          "label": "持续时间 (秒)",
+          "default": 1.5
+        },
+        {
+          "key": "preset",
+          "type": "preset",
+          "label": "波形预设",
+          "default": "CS2-受伤"
+        },
+        {
+          "key": "channel",
+          "type": "channel",
+          "label": "通道",
+          "default": "both"
+        }
+      ]
+    }
+  ]
+}

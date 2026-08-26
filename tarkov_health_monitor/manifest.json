@@ -1,10 +1,11 @@
 {
   "id": "tarkov_health_monitor",
   "name": "塔科夫血量监控",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "sdk": "1",
-  "author": "Your Name",
-  "description": "读取塔科夫血量，低于阈值触发郊狼",
+  "author": "鱼汤",
+  "homepage": "https://github.com/qtjtrbxqw-ux/Tarkov-Coyote-Plugin",
+  "description": "读取塔科夫血量，低于阈值触发郊狼（支持基址/临时地址双模式）\n使用教程：1. 用CE找到血量基址或临时地址；2. 在插件配置中选择模式并填入地址；3. 启用插件，进入游戏自动监控。详细教程请点击主页链接。",
   "entry": "main.py",
   "capabilities": {
     "startup_check": true
@@ -16,16 +17,23 @@
         {
           "key": "base_address",
           "type": "text",
-          "label": "基址 (十六进制)",
+          "label": "基址 / 动态地址",
           "default": "0x792F5734",
-          "description": "CE找到的绿色地址"
+          "description": "填入基址（如0x00601630）或临时动态地址（如0x7A50D734）"
         },
         {
           "key": "offsets",
           "type": "text",
           "label": "偏移链 (逗号分隔)",
           "default": "",
-          "description": "例如 0x10,0x24"
+          "description": "例如 0x10,0x24（使用基址时必填；直接模式时留空）"
+        },
+        {
+          "key": "use_direct",
+          "type": "bool",
+          "label": "使用直接地址（临时地址模式）",
+          "default": false,
+          "description": "开启后，直接将 base_address 作为地址读取，忽略偏移链"
         }
       ]
     },

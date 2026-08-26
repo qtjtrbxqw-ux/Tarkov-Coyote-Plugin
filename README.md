@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/status-stable-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/version-1.0.8-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.0.9-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/DGHub-SDK%20v1-orange?style=for-the-badge" alt="DGHub SDK">
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/platform-Windows-9cf?style=for-the-badge" alt="Platform">
@@ -55,13 +55,14 @@
 - Windows 10/11
 - DGHub 已运行并配对郊狼设备
 - 塔科夫离线版 (SPT-AKI) 已启动
+- **Python 依赖**：插件需要 `pymem` 库。如果压缩包中未包含 `vendor/pymem`，请手动安装：`pip install pymem`
 
 ### 安装
 1. 从 Releases 下载最新 ZIP 包
 2. DGHub → 插件中心 → 外部插件 → 导入 zip
 3. 启用插件 → 配置参数 → 开始监控
 
-> 💡 无需额外安装 Python 环境（已内置 vendor 支持）
+> 💡 首次使用推荐 **全自动扫描** 模式，无需手动配置地址。
 
 ---
 
@@ -69,35 +70,9 @@
 
 | 模式 | 优点 | 缺点 | 适用场景 |
 |------|------|------|----------|
-| **全自动扫描** | 无需任何配置，开箱即用 | 扫描较慢（约3-5秒） | 新手用户 / 快速测试 |
+| **全自动扫描** | 无需任何配置，开箱即用 | 扫描较慢（约10-30秒） | 新手用户 / 快速测试 |
 | **AOB特征码** | 速度快，精准可靠 | 需手动获取特征码 | 追求稳定 / 长期使用 |
 | **手动模式** | 完全可控 | 需CE查找地址 | 熟悉CE的玩家 |
-
----
-
-### 模式一：全自动扫描（推荐新手）
-
-**无需任何配置**，选择 `auto_scan` 模式即可。
-
-- 插件启动后自动扫描内存定位血量地址
-- 可在配置中调整 `扫描范围`（默认 1-500 HP），提高扫描效率
-- 扫描结果会在日志中显示
-
----
-
-### 模式二：AOB特征码（推荐进阶用户）
-
-填入特征码和偏移量，插件自动定位地址。
-
-- **特征码格式**：`89 45 ?? 8B 45`（空格分隔，??为通配符）
-- **偏移量**：特征码到血量地址的偏移（一般为 0）
-
----
-
-### 模式三：手动模式（推荐熟悉CE的用户）
-
-- **基址模式**：填入基址和偏移链
-- **直接地址模式**：填入临时动态地址
 
 ---
 
@@ -133,7 +108,7 @@
 | `最大强度` | 动态模式下最高强度 | `100%` |
 | `最大映射伤害` | 达到此伤害输出最大强度 | `50 HP` |
 | `持续时间` | 波形播放时长 | `1.5s` |
-| `波形预设` | DGHub 内置波形 | `CS2-受伤` |
+| `波形预设名称` | DGHub 内置波形名称 | `CS2-受伤` |
 | `通道` | a / b / both | `both` |
 
 ### 动态强度示例
@@ -152,7 +127,7 @@
 ### 全自动扫描（最简单）
 
 1. 选择 `auto_scan` 模式
-2. 启用插件，等待扫描完成（约3-5秒）
+2. 启用插件，等待扫描完成（约10-30秒）
 3. 日志显示地址即表示成功
 
 ### AOB特征码（进阶）
@@ -195,6 +170,11 @@
 <details>
 <summary><b>配置修改后不生效</b></summary>
 插件支持热更新，保存后自动生效。
+</details>
+
+<details>
+<summary><b>提示缺少 pymem 库</b></summary>
+请执行 <code>pip install pymem</code>，或将 pymem 目录放入插件根目录的 <code>vendor/</code> 下。
 </details>
 
 ---

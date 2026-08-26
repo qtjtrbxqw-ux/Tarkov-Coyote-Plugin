@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/status-stable-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/version-1.0.5-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.0.6-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/DGHub-SDK%20v1-orange?style=for-the-badge" alt="DGHub SDK">
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/platform-Windows-9cf?style=for-the-badge" alt="Platform">
@@ -9,7 +9,7 @@
 # 🔴 Tarkov Health Monitor
 
 > **实时血量监控插件 · 为《逃离塔科夫》离线版 (SPT) 定制**  
-> *低延迟 · 双模式寻址 · 动态伤害强度 · 无缝 DGHub 集成*
+> *低延迟 · 双模式寻址 · 动态伤害强度 · 热更新 · 无缝 DGHub 集成*
 
 <p align="center">
   <b>将游戏伤痛，转化为身体感知。</b>
@@ -30,7 +30,8 @@
 它通过直接读取游戏进程内存中的玩家生命值，在血量低于设定阈值时，自动通过 DGHub 触发 DG-LAB 郊狼设备反馈，实现**伤害感知的沉浸式体验**。
 
 > ✅ 适用于 SPT 3.x / 4.x 全版本（需自行适配偏移）  
-> ✅ 零侵入 · 不修改游戏文件 · 纯内存读取
+> ✅ 零侵入 · 不修改游戏文件 · 纯内存读取  
+> ✅ 所有配置支持热更新，修改后即时生效
 
 ---
 
@@ -110,13 +111,13 @@
 ### 方式 A：基址 + 偏移链（推荐，永久有效）
 1. 打开 Cheat Engine，附加 `EscapeFromTarkov.exe`
 2. 搜索当前血量（数值类型：Float），反复扫描直到地址唯一
-3. 右键地址 → “找出是什么改写了这个地址” → 回游戏改血量 → 记录偏移量和寄存器值
+3. 右键地址 → "找出是什么改写了这个地址" → 回游戏改血量 → 记录偏移量和寄存器值
 4. 扫描寄存器值 → 找到绿色基址
-5. 填入插件 → 关闭“使用直接地址”
+5. 填入插件 → 关闭"使用直接地址"
 
 ### 方式 B：直接地址（临时，仅限当前会话）
 1. 同方式 A 前两步，找到当前血量的动态地址（黑色）
-2. 填入插件 → 开启“使用直接地址”
+2. 填入插件 → 开启"使用直接地址"
 > ⚠️ 游戏重启后地址会变化，需重新操作
 
 ---
@@ -124,13 +125,13 @@
 ## ❓ FAQ
 
 <details>
-<summary><b>插件启用后一直显示“等待游戏启动”</b></summary>
+<summary><b>插件启用后一直显示"等待游戏启动"</b></summary>
 确保游戏已运行，进程名为 <code>EscapeFromTarkov.exe</code>。若使用自定义 exe，请修改 <code>main.py</code> 中的进程名。
 </details>
 
 <details>
-<summary><b>一直显示“读取失败”</b></summary>
-检查地址和偏移是否正确，或切换“直接地址”模式测试。若使用临时地址，确认游戏重启后已更新。
+<summary><b>一直显示"读取失败"</b></summary>
+检查地址和偏移是否正确，或切换"直接地址"模式测试。若使用临时地址，确认游戏重启后已更新。
 </details>
 
 <details>
@@ -139,13 +140,8 @@
 </details>
 
 <details>
-<summary><b>配置修改后不生效</b></summary>
-插件支持热更新，保存后自动生效。若无效，可尝试重新保存或重启插件。
-</details>
-
-<details>
 <summary><b>动态强度怎么用？</b></summary>
-开启“启用动态伤害强度”后，插件会自动根据受到的伤害值计算强度。伤害越高，强度越大。可在配置中调整最小/最大强度及映射范围。
+开启"启用动态伤害强度"后，插件会自动根据受到的伤害值计算强度。伤害越高，强度越大。可在配置中调整最小/最大强度及映射范围。
 </details>
 
 ---

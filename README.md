@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/status-stable-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/version-1.0.4-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.0.5-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/DGHub-SDK%20v1-orange?style=for-the-badge" alt="DGHub SDK">
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/platform-Windows-9cf?style=for-the-badge" alt="Platform">
@@ -9,7 +9,7 @@
 # 🔴 Tarkov Health Monitor
 
 > **Real-time health monitoring plugin for Escape From Tarkov (SPT) via DGHub**  
-> *低延迟 · 双模式寻址 · 无缝 DGHub 集成*
+> *低延迟 · 双模式寻址 · 动态伤害强度 · 无缝 DGHub 集成*
 
 <p align="center">
   <b>将游戏伤痛，转化为身体感知。</b>
@@ -34,6 +34,7 @@
 |------|------|
 | ⚡ **超低延迟** | < 100ms 的读取响应，实时反馈 |
 | 🧠 **双模式寻址** | 基址+偏移链（永久） / 直接地址（临时） |
+| 📊 **动态伤害强度** | 根据受到的伤害值自动调整反馈强度（v1.0.5 新增） |
 | 🔁 **自动重连** | 游戏崩溃后自动恢复连接，无需人工干预 |
 | 🎛️ **配置热更新** | 所有参数通过 DGHub 界面实时调整，无需重启 |
 | 📡 **事件驱动触发** | 基于 `trigger` 协议，完整支持强度+波形+回退机制 |
@@ -68,13 +69,25 @@
 | `生命阈值` | 低于此值触发脉冲 | `30` |
 | `检查间隔` | 内存读取频率（秒） | `0.2s` |
 
-### 反馈参数
+### 反馈参数（v1.0.5 新增动态强度）
 | 字段 | 说明 | 默认 |
 |------|------|------|
-| `强度增量` | 相对于基线的百分比 | `50%` |
+| `启用动态伤害强度` | 开启后根据伤害自动调整强度 | `true` |
+| `固定强度增量` | 关闭动态时使用的固定值 | `50%` |
+| `最小强度` | 动态模式下最低强度 | `20%` |
+| `最大强度` | 动态模式下最高强度 | `100%` |
+| `最大映射伤害` | 达到此伤害输出最大强度 | `50 HP` |
 | `持续时间` | 波形播放时长 | `1.5s` |
 | `波形预设` | DGHub 内置波形 | `CS2-受伤` |
 | `通道` | a / b / both | `both` |
+
+### 动态强度示例
+| 受到伤害 | 输出强度 |
+|----------|----------|
+| 5 HP | 28% |
+| 15 HP | 44% |
+| 30 HP | 68% |
+| 50 HP+ | 100% |
 
 ## 🔍 寻址指南
 
@@ -88,6 +101,25 @@
 1. CE 搜血量 → 得到动态地址
 2. 填入插件 → 开启“使用直接地址”
 > ⚠️ 游戏重启后需重新操作
+
+## 📝 版本历史
+
+### v1.0.5 (2025-08-26)
+- ✨ 新增**动态伤害强度**功能：根据受到的伤害值自动调整反馈强度
+- 📊 新增配置项：最小强度、最大强度、最大映射伤害
+- 📝 优化日志显示：显示伤害值和对应的动态强度百分比
+- 🇨🇳 全面中文化界面（DGHub 前台全部中文）
+
+### v1.0.4 (2025-08-26)
+- ✨ 新增临时地址（直接读取）模式，支持快速测试
+- 🔗 添加 GitHub 仓库链接
+- 🐛 修复握手时序问题
+- 📄 更新作者信息为“鱼汤”
+
+### v1.0.0 (初始版本)
+- 🎉 支持基址+偏移链读取血量
+- ⚡ 集成 DGHub trigger 反馈
+- 🔁 支持游戏进程自动重连
 
 ## ❓ FAQ
 
@@ -111,6 +143,11 @@
 插件支持热更新，保存后自动生效。若无效，可尝试重新保存或重启插件。
 </details>
 
+<details>
+<summary><b>动态强度怎么用？</b></summary>
+开启“启用动态伤害强度”后，插件会自动根据受到的伤害值计算强度。伤害越高，强度越大。可在配置中调整最小/最大强度及映射范围。
+</details>
+
 ## 📄 许可证
 
 [MIT](LICENSE) © 2025 鱼汤
@@ -121,6 +158,9 @@
 - [DG-LAB](https://www.dg-lab.com/) – 郊狼设备
 - SPT 社区所有测试者
 
+<p align="center">
+  <b>Made with ❤️ by 鱼汤</b>
+</p>
 <p align="center">
   <b>Made with ❤️ by 鱼汤</b>
 </p>
